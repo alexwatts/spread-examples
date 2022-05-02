@@ -15,25 +15,25 @@ import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class MeterReadings {
+public class MeterReadingsTest {
 
     private static final String METER_ID = "ALWA123";
 
     private MeterReadingService meterReadingService;
 
-    private LocalDateTime WEEK_START = LocalDateTime.of(2022, 4, 2, 1, 1);
+    private final LocalDateTime WEEK_START = LocalDateTime.of(2022, 4, 2, 1, 1);
 
-    private Spread<Instant> EVERY_HOUR =
+    private final Spread<Instant> EVERY_HOUR =
         SpreadUtil
             .initial(WEEK_START)
             .step(dateTime -> dateTime.plusHours(1))
             .map(dateTime -> dateTime.toInstant(ZoneOffset.UTC));
 
-    private Spread<BigDecimal> tenThousandKws = SpreadUtil.cumulative(BigDecimal.valueOf(10000));
+    private final Spread<BigDecimal> TEN_THOUSAND_KWS = SpreadUtil.cumulative(BigDecimal.valueOf(10000));
 
-    private List<ElectricityReading> READINGS_ACROSS_WEEK =
+    private final List<ElectricityReading> READINGS_ACROSS_WEEK =
         new Spreader<ElectricityReading>()
-            .factory(() -> new ElectricityReading(Spread.in(EVERY_HOUR), Spread.in(tenThousandKws)))
+            .factory(() -> new ElectricityReading(Spread.in(EVERY_HOUR), Spread.in(TEN_THOUSAND_KWS)))
             .steps(168)
             .spread()
             .collect(Collectors.toList());
