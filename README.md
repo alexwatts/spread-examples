@@ -5,7 +5,7 @@ There is a package in src/test/java for every example Test.
 
 | package              | test                                                                             |
 |----------------------|----------------------------------------------------------------------------------|
-| examples/electricity | [Electricity Readings](src/test/java/examples/electricity/MeterReadingsTest.java) |
+| examples/electricity | [Electricity Readings](src/test/java/examples/electricity/MeterReadingsTest.java)|
 | examples/money       | [Transactions](src/test/java/examples/money/TransactionsTest.java)               |
 | examples/orders      | [Orders](src/test/java/examples/orders/OrderTest.java)                           |
 
