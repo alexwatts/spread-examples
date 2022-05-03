@@ -6,6 +6,7 @@ import com.alwa.spread.Spreader;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -21,16 +22,18 @@ public class OrderTest {
 
     private final Spread<Integer> VARIABLE_QUANTITIES = SpreadUtil.sequence(1, 2, 3);
 
-    private final Spreader<OrderLine> ORDER_LINES =
-        new Spreader<OrderLine>()
-            .factory(() -> new OrderLine(Spread.in(THREE_PRODUCTS), Spread.in(VARIABLE_QUANTITIES)))
-            .steps(3);
+    private final Spread<List<OrderLine>> ORDER_LINES =
+        SpreadUtil.list(
+            new Spreader<OrderLine>()
+                .factory(() -> new OrderLine(Spread.in(THREE_PRODUCTS), Spread.in(VARIABLE_QUANTITIES)))
+                .steps(3)
+        );
 
     private final Spread<String> CUSTOMER_ID = SpreadUtil.fixed("ALWA123");
 
     private final Order ORDER =
         new Spreader<Order>()
-            .factory(() -> new Order(Spread.in(CUSTOMER_ID), Spread.in(SpreadUtil.list(ORDER_LINES))))
+            .factory(() -> new Order(Spread.in(CUSTOMER_ID), Spread.in((ORDER_LINES))))
             .steps(1)
             .spread()
             .collect(Collectors.toList())
@@ -38,7 +41,7 @@ public class OrderTest {
 
     @Test
     public void testOrderLinesTotalUpToCorrectPrice() {
-        assertThat(ORDER.getOrderTotal()).isEqualTo(BigDecimal.valueOf(132123.23));
+        assertThat(ORDER.getOrderTotal()).isEqualTo(BigDecimal.valueOf(100.94));
     }
 
 }
