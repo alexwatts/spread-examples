@@ -26,13 +26,13 @@ public class WeatherTest {
     private final LocalDateTime START_OF_YEAR = LocalDateTime.of(2020, 1, 1, 0, 0, 0);
 
     @In
-    private final Spread<BigDecimal> AVERAGE_TEMPERATURES =
+    private final Spread<BigDecimal> COUNTY_RAINFALL =
         SpreadUtil.sequence(
             SpreadUtil.cumulative(BigDecimal.valueOf(13.1)), //Avon,
             SpreadUtil.cumulative(BigDecimal.valueOf(3.7)),  //Bath_and_North_East_Somerset,
             SpreadUtil.cumulative(BigDecimal.valueOf(8.7)),  //Bedfordshire,
             SpreadUtil.cumulative(BigDecimal.valueOf(18.7)), //Bedford,
-            SpreadUtil.cumulative(BigDecimal.valueOf(7.1))   //Berkshir,
+            SpreadUtil.cumulative(BigDecimal.valueOf(7.1))   //Berkshire,
         );
 
     @In
@@ -42,16 +42,17 @@ public class WeatherTest {
             .map(localDateTime -> localDateTime.toInstant(ZoneOffset.UTC));
 
     @In
+    private final Spread<County> COUNTIES = SpreadUtil.sequence(County.values());
+
+    @In
     @Dynamic
     @Embed(clazz = List.class, steps = 365)
     private final Spread<RainfallReading> RAINFALL_READINGS =
         SpreadUtil.complexType(
             new Spreader<RainfallReading>()
-                .factory(() -> new RainfallReading(Spread.in(EVERY_DAY), Spread.in(AVERAGE_TEMPERATURES, 365)))
+                .factory(() -> new RainfallReading(Spread.in(EVERY_DAY), Spread.in(COUNTY_RAINFALL, 365)))
         );
 
-    @In
-    private final Spread<County> COUNTIES = SpreadUtil.sequence(County.values());
 
     @BeforeEach
     public void setup() {
