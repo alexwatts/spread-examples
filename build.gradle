@@ -46,7 +46,7 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.4.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.4.0'
 
-    testImplementation 'io.github.alexwatts:spread:2.0.2'
+    testImplementation 'io.github.alexwatts:spread:2.0.3'
 }
 
 test {
