@@ -5,5 +5,5 @@ public enum County {
     Bath_and_North_East_Somerset,
     Bedfordshire,
     Bedford,
-    Berkshir
+    Berkshire
 }

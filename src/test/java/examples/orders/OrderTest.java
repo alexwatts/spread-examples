@@ -50,7 +50,7 @@ public class OrderTest {
        Order ORDER =
             new Spreader<Order>()
                 .factory(() -> new Order(Spread.in(CUSTOMER_ID), (List<OrderLine>)Spread.embed(ORDER_LINES)))
-                .steps(3)
+                .steps(1)
                 .singular();
 
         assertThat(ORDER.getOrderTotal()).isEqualTo(BigDecimal.valueOf(100.94));

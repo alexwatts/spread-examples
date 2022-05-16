@@ -23,7 +23,8 @@ public class WeatherTest {
 
     private static WeatherService weatherService;
 
-    private final LocalDateTime START_OF_YEAR = LocalDateTime.of(2020, 1, 1, 0, 0, 0);
+    private final LocalDateTime START_OF_YEAR =
+        LocalDateTime.of(2020, 1, 1, 0, 0, 0);
 
     @In
     private final Spread<BigDecimal> COUNTY_RAINFALL =
@@ -50,9 +51,13 @@ public class WeatherTest {
     private final Spread<RainfallReading> RAINFALL_READINGS =
         SpreadUtil.complexType(
             new Spreader<RainfallReading>()
-                .factory(() -> new RainfallReading(Spread.in(EVERY_DAY), Spread.in(COUNTY_RAINFALL, 365)))
+                .factory(() ->
+                    new RainfallReading(
+                        Spread.in(EVERY_DAY),
+                        Spread.in(COUNTY_RAINFALL, 365)
+                    )
+                )
         );
-
 
     @BeforeEach
     public void setup() {
@@ -63,7 +68,10 @@ public class WeatherTest {
 
         Map<County, List<RainfallReading>> COUNTRY_WEATHER_READINGS =
             new Spreader<Map.Entry<County, List<RainfallReading>>>()
-                .factory(() -> Map.entry(Spread.in(COUNTIES), (List<RainfallReading>)Spread.embed(RAINFALL_READINGS)))
+                .factory(() ->
+                    Map.entry(Spread.in(COUNTIES),
+                        (List<RainfallReading>)Spread.embed(RAINFALL_READINGS))
+                )
                 .steps(5)
                 .spread()
                 .collect(
@@ -99,7 +107,7 @@ public class WeatherTest {
 
     @Test
     public void berkshireRainFallReadingsCorrect() {
-        BigDecimal totalRainfallBerkshire = weatherService.getTotalRainfall(County.Berkshir);
+        BigDecimal totalRainfallBerkshire = weatherService.getTotalRainfall(County.Berkshire);
         assertThat(totalRainfallBerkshire).isEqualTo(BigDecimal.valueOf(7.1).setScale(2, RoundingMode.DOWN));
     }
 
