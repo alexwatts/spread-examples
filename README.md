@@ -9,6 +9,6 @@ There is a package in src/test/java for every example Test.
 | examples/money       | [Transactions](src/test/java/examples/money/TransactionsTest.java)                |
 | examples/orders      | [Orders](src/test/java/examples/orders/OrderTest.java)                            |
 | examples/weather     | [Weather](src/test/java/examples/weather/WeatherTest.java)                        |
-| examples/epos        | [Weather](src/test/java/examples/epos/EposTest.java)                              |
+| examples/epos        | [Epos](src/test/java/examples/epos/EposTest.java)                                 |
 
 You can find the Spread source code and it's documentation [here](https://github.com/alexwatts/spread)
