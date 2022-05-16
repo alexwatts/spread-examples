@@ -96,23 +96,8 @@ public class EposTest {
             this,
             this.getClass().getPackage().getName()
         );
-
-        Map<String, Product> BARCODES_PRODUCTS =
-            new Spreader<Map.Entry<String, Product>>()
-                .factory(() ->
-                    Map.entry(
-                        Spread.in(BARCODES),
-                        Spread.in(PRODUCTS)
-                    )
-                )
-                .steps(20)
-                .spread()
-                .collect(
-                    Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue)
-                );
-
         stockEventService = new StockEventService(new ArrayList<>());
-        eposService = new EposService(BARCODES_PRODUCTS, stockEventService);
+        eposService = new EposService(barcodesProductsMap(), stockEventService);
     }
 
     @Test
@@ -143,6 +128,21 @@ public class EposTest {
                 .collect(Collectors.toList());
 
         assertThat(stockEventService.getStockEvents()).isEqualTo(STOCK_EVENTS);
+    }
+
+    private Map<String, Product> barcodesProductsMap() {
+        return new Spreader<Map.Entry<String, Product>>()
+            .factory(() ->
+                Map.entry(
+                    Spread.in(BARCODES),
+                    Spread.in(PRODUCTS)
+                )
+            )
+            .steps(20)
+            .spread()
+            .collect(
+                Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue)
+            );
     }
 
 }
