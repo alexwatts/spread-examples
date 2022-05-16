@@ -19,12 +19,11 @@ public class Order {
         return orderLines
             .stream()
             .map(orderLine ->
-                orderLine
-                    .getProduct()
-                        .getPrice().multiply(
-                            BigDecimal.valueOf(orderLine.getQuantity()
-                            )
-                    ))
+                orderLine.getProduct()
+                    .getPrice().multiply(
+                            BigDecimal.valueOf(orderLine.getQuantity())
+                    )
+            )
             .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 }
