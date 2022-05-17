@@ -10,7 +10,7 @@ There is a package in src/test/java for every example Test.
 | examples/orders      | [Orders](src/test/java/examples/orders/OrderTest.java)                            |
 | examples/weather     | [Weather](src/test/java/examples/weather/WeatherTest.java)                        |
 | examples/epos        | [Epos](src/test/java/examples/epos/EposTest.java)                                 |
-| examples/lottery     | [Epos](src/test/java/examples/lottery/LotteryTest.java)                           |
+| examples/lottery     | [Lottery](src/test/java/examples/lottery/LotteryTest.java)                        |
 
 
 You can find the Spread source code and it's documentation [here](https://github.com/alexwatts/spread)
