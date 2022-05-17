@@ -1,11 +1,11 @@
 package examples.weather;
 
-import com.alwa.spread.Spread;
 import com.alwa.spread.SpreadUtil;
 import com.alwa.spread.Spreader;
 import com.alwa.spread.annotations.Dynamic;
 import com.alwa.spread.annotations.Embed;
 import com.alwa.spread.annotations.In;
+import com.alwa.spread.core.Spread;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.math.BigDecimal;
