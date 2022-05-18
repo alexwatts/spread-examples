@@ -101,8 +101,10 @@ public class WeatherTest {
     private Map<County, List<RainfallReading>> countyRainfallMap() {
         return new Spreader<Map.Entry<County, List<RainfallReading>>>()
             .factory(() ->
-                Map.entry(Spread.in(COUNTIES),
-                    (List<RainfallReading>)Spread.embed(RAINFALL_READINGS))
+                Map.entry(
+                    Spread.in(COUNTIES),
+                    (List<RainfallReading>)Spread.embed(RAINFALL_READINGS)
+                )
             )
             .steps(5)
             .spread()
